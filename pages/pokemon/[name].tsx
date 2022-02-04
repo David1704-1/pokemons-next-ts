@@ -15,7 +15,7 @@ const Pokemon: NextPage<Props> = ({pokemon})=>{
         <>
         <title>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1,pokemon.name.length)}</title>
         <Card
-            style={{ width: '400px', margin: 'auto',padding:'10px', borderRadius:'20px' }}
+            style={{ width: '400px', margin: 'auto',padding:'10px', borderRadius:'20px', marginTop:'30px', marginBottom: '30px' }}
             cover={<img alt="" src={pokemon.sprites.front_default} />}
         >
        <h1 style={{fontFamily: `Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace`}}>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1,pokemon.name.length)}</h1>
