@@ -19,7 +19,8 @@ const Page: NextPage<PokemonsProps> = ({pokemons, count}) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Pokemons</h1>       
+        <h1 className={styles.title} style={{fontFamily: `Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace`, marginBottom: '20px'}}>Pokemons</h1>       
+        
         <div className={styles.grid} style={{marginBottom:'30px'}}>          
         <Row gutter={[16,24]}>
             {
