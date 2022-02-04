@@ -19,6 +19,7 @@ const Pokemon: NextPage<Props> = ({pokemon})=>{
             cover={<img alt="" src={pokemon.sprites.front_default} />}
         >
        <h1 style={{fontFamily: `Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace`}}>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.substring(1,pokemon.name.length)}</h1>
+       <hr style={{border:0,height: '1px',backgroundImage:'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))'}}/>
        <p style={{fontSize:'16px',fontFamily:'Consolas, monaco, monospace'}}>Moves: {
             pokemon.moves.map((move,index) => {
                 if(index === pokemon.moves.length-1)
