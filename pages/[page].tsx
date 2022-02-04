@@ -9,6 +9,7 @@ import { Pagination } from 'antd'
 import 'antd/dist/antd.css'
 import Router from 'next/router'
 import {Row, Col, Card} from 'antd'
+import { hr_style, h2_font_style, h1_font_style } from '../styles'
 
 const Page: NextPage<PokemonsProps> = ({pokemons, count}) => {
   return (
@@ -19,12 +20,14 @@ const Page: NextPage<PokemonsProps> = ({pokemons, count}) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title} style={{fontFamily: `Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace`, marginBottom: '20px'}}>Pokemons</h1>       
+        <h1 className={styles.title} style={h1_font_style}>Pokemons</h1>       
         
         <div className={styles.grid} style={{marginBottom:'30px'}}>          
         <Row gutter={[16,24]}>
             {
-                pokemons.results.map(res => {                    
+                pokemons.results.map(res => {   
+                const pokemon_name = res.name.charAt(0).toUpperCase() + res.name.substring(1,res.name.length)    
+
                     return(
                         <Col className="gutter-row" span={6} key={res.name}>
                             <a href={'pokemon/' + res.name}>                       
@@ -33,8 +36,8 @@ const Page: NextPage<PokemonsProps> = ({pokemons, count}) => {
                                 style={{ width: 240, borderRadius:'20px' }}
                                 cover={<img alt="" src={res.image} />}
                                 >
-                                  <hr style={{border:0,height: '1px',backgroundImage:'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))'}}/>
-                                    <h2 style={{fontFamily: `Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace`}}>{res.name.charAt(0).toUpperCase()+res.name.substring(1,res.name.length)} &rarr;</h2>
+                                  <hr style={hr_style}/>
+                                    <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
                                 </Card>
                             </a>
                         </Col>
