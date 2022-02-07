@@ -13,6 +13,7 @@ import "antd/dist/antd.css";
 import Router from "next/router";
 import { Row, Col, Card } from "antd";
 import { hr_style, h2_font_style } from "../styles";
+import Image from "next/image";
 
 const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
   return (
@@ -23,11 +24,13 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
       </Head>
 
       <main className={styles.main}>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+        <Image
+          src={
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+          }
+          width={500}
+          height={200}
           alt=""
-          width={"30%"}
-          style={{ marginBottom: "30px" }}
         />
 
         <div className={styles.grid} style={{ marginBottom: "30px" }}>
@@ -36,14 +39,20 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
               const pokemon_name =
                 res.name.charAt(0).toUpperCase() +
                 res.name.substring(1, res.name.length);
-
               return (
                 <Col className="gutter-row" span={6} key={res.name}>
                   <a href={"pokemon/" + res.name}>
                     <Card
                       hoverable
                       style={{ width: 240, borderRadius: "20px" }}
-                      cover={<img src={res.artwork} alt="" />}
+                      cover={
+                        <Image
+                          src={res.artwork}
+                          width={250}
+                          height={250}
+                          alt=""
+                        />
+                      }
                     >
                       <hr style={hr_style} />
                       <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>

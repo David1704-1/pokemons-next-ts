@@ -5,6 +5,7 @@ import { PokemonType, PokemonResponseType } from "../../types";
 import { Card } from "antd";
 import "antd/dist/antd.css";
 import { card_style, h1_font_style, hr_style, p_style } from "../../styles";
+import Image from "next/image";
 
 interface Props {
   pokemon: PokemonType;
@@ -19,7 +20,14 @@ const Pokemon: NextPage<Props> = ({ pokemon }) => {
       <title>{pokemon_name}</title>
       <Card
         style={card_style}
-        cover={<img alt="" src={pokemon.sprites.front_default} />}
+        cover={
+          <Image
+            src={pokemon.sprites.front_default}
+            alt=""
+            width={400}
+            height={400}
+          />
+        }
       >
         <h1 style={h1_font_style}>
           {pokemon.name.charAt(0).toUpperCase() +
