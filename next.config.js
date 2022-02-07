@@ -12,7 +12,8 @@ const nextConfig = {
   },
   images: {
     domains: ["upload.wikimedia.org", "raw.githubusercontent.com"],
-    loader: "default",
+    loader: "imgix",
+    path: "",
   },
 };
 

@@ -24,14 +24,16 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
       </Head>
 
       <main className={styles.main}>
-        <Image
-          src={
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
-          }
-          width={500}
-          height={200}
-          alt=""
-        />
+        <div style={{ marginBottom: "35px" }}>
+          <Image
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+            }
+            width={500}
+            height={200}
+            alt=""
+          />
+        </div>
 
         <div className={styles.grid} style={{ marginBottom: "30px" }}>
           <Row gutter={[16, 24]}>
