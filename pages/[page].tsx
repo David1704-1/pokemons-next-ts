@@ -12,9 +12,9 @@ import { Pagination } from "antd";
 import "antd/dist/antd.css";
 import Router from "next/router";
 import { Row, Col, Card } from "antd";
-import { hr_style, h2_font_style, h1_font_style } from "../styles";
+import { hr_style, h2_font_style } from "../styles";
 
-const Page: NextPage<PokemonsProps> = ({ pokemons, count }) => {
+const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,9 +23,12 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count }) => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title} style={h1_font_style}>
-          Pokemons
-        </h1>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png"
+          alt=""
+          width={"30%"}
+          style={{ marginBottom: "30px" }}
+        />
 
         <div className={styles.grid} style={{ marginBottom: "30px" }}>
           <Row gutter={[16, 24]}>
@@ -40,7 +43,7 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count }) => {
                     <Card
                       hoverable
                       style={{ width: 240, borderRadius: "20px" }}
-                      cover={<img src={res.image} alt="" />}
+                      cover={<img src={res.artwork} alt="" />}
                     >
                       <hr style={hr_style} />
                       <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
@@ -58,6 +61,7 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count }) => {
           }}
           showSizeChanger={false}
           pageSize={16}
+          current={parseInt(page)}
         />
       </main>
     </div>
@@ -75,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (
           count
           results {
             name
-            image
+            artwork
           }
         }
       }
@@ -89,6 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       pokemons: data.pokemons,
       count: data.pokemons.count,
+      page: context.query.page,
     },
   };
 };

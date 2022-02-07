@@ -4,13 +4,14 @@ export interface PokemonsType {
     {
       url: string;
       name: string;
-      image: string;
+      artwork: string;
     }
   ];
 }
 export interface PokemonsProps {
   pokemons: PokemonsType;
   count: number;
+  page: string;
 }
 export interface PokemonType {
   id: number;
@@ -18,9 +19,17 @@ export interface PokemonType {
   sprites: {
     front_default: string;
   };
-  moves: [
+  abilities: [
     {
-      move: {
+      ability: {
+        name: string;
+      };
+    }
+  ];
+  stats: [
+    {
+      base_stat: number;
+      stat: {
         name: string;
       };
     }

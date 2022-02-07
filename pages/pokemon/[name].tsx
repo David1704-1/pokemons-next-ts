@@ -27,17 +27,37 @@ const Pokemon: NextPage<Props> = ({ pokemon }) => {
         </h1>
         <hr style={hr_style} />
         <p style={p_style}>
-          Moves:{" "}
-          {pokemon.moves.map((move, index) => {
-            if (index === pokemon.moves.length - 1) return move.move.name;
-            return move.move.name + ", ";
+          Type(s):{" "}
+          {pokemon.types.map((type, index) => {
+            if (index === pokemon.types.length - 1) return type.type.name;
+            return type.type.name + ", ";
           })}
         </p>
         <p style={p_style}>
-          Type(s):{" "}
-          {pokemon.types.map((type) => {
-            return type.type.name;
+          Abilities:{" "}
+          {pokemon.abilities.map((ability, index) => {
+            if (index === pokemon.abilities.length - 1)
+              return ability.ability.name;
+            return ability.ability.name + ", ";
           })}
+        </p>
+        <p style={p_style}>
+          Stats:
+          <ul>
+            {pokemon.stats.map((stat, index) => {
+              if (index === pokemon.stats.length - 1)
+                return (
+                  <li
+                    key={stat.stat.name}
+                  >{`${stat.stat.name}: ${stat.base_stat}`}</li>
+                );
+              return (
+                <li
+                  key={stat.stat.name}
+                >{`${stat.stat.name}: ${stat.base_stat}, `}</li>
+              );
+            })}
+          </ul>
         </p>
       </Card>
     </>
@@ -47,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const name = context.query.name;
-  const { data } = await client.query<PokemonResponseType>({
+  let { data } = await client.query<PokemonResponseType>({
     query: gql`
       query pokemon($name: String!) {
         pokemon(name: $name) {
@@ -56,8 +76,14 @@ export const getServerSideProps: GetServerSideProps = async (
           sprites {
             front_default
           }
-          moves {
-            move {
+          abilities {
+            ability {
+              name
+            }
+          }
+          stats {
+            base_stat
+            stat {
               name
             }
           }
