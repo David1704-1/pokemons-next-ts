@@ -18,9 +18,9 @@ import React, { useState } from "react";
 
 const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
   const [val, setVal] = useState("");
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setVal(e.target.value);
+    setVal(e.currentTarget.value);
   };
   return (
     <div className={styles.container}>
