@@ -8,14 +8,20 @@ import styles from "../styles/Home.module.css";
 import client from "../apollo-client";
 import gql from "graphql-tag";
 import { PokemonsProps, PokemonsResponseType } from "../types";
-import { Pagination } from "antd";
+import { Pagination, Input } from "antd";
 import "antd/dist/antd.css";
 import Router from "next/router";
 import { Row, Col, Card } from "antd";
 import { hr_style, h2_font_style } from "../styles";
 import Image from "next/image";
+import React, { useState } from "react";
 
 const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
+  const [val, setVal] = useState("");
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    setVal(e.target.value);
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -36,33 +42,46 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
         </div>
 
         <div className={styles.grid} style={{ marginBottom: "30px" }}>
-          <Row gutter={[16, 24]}>
-            {pokemons.results.map((res) => {
-              const pokemon_name =
-                res.name.charAt(0).toUpperCase() +
-                res.name.substring(1, res.name.length);
-              return (
-                <Col className="gutter-row" span={6} key={res.name}>
-                  <a href={"pokemon/" + res.name}>
-                    <Card
-                      hoverable
-                      style={{ width: 240, borderRadius: "20px" }}
-                      cover={
-                        <Image
-                          src={res.artwork}
-                          width={250}
-                          height={250}
-                          alt=""
-                        />
-                      }
-                    >
-                      <hr style={hr_style} />
-                      <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
-                    </Card>
-                  </a>
-                </Col>
-              );
-            })}
+          <Input
+            style={{ marginBottom: "20px", borderRadius: "10px" }}
+            placeholder="Search current page"
+            onChange={(e) => handleChange(e)}
+          />
+          <Row gutter={[16, 24]} className="rowclass">
+            {pokemons.results
+              .map((res) => {
+                const pokemon_name =
+                  res.name.charAt(0).toUpperCase() +
+                  res.name.substring(1, res.name.length);
+                return (
+                  <Col span={6} key={res.name}>
+                    <a href={"pokemon/" + res.name}>
+                      <Card
+                        hoverable
+                        style={{
+                          width: 240,
+                          borderRadius: "20px",
+                          marginRight: "500px",
+                        }}
+                        cover={
+                          <Image
+                            src={res.artwork}
+                            width={250}
+                            height={250}
+                            alt=""
+                          />
+                        }
+                      >
+                        <hr style={hr_style} />
+                        <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
+                      </Card>
+                    </a>
+                  </Col>
+                );
+              })
+              .filter((element) => {
+                return element.key?.toString().includes(val.toLowerCase());
+              })}
           </Row>
         </div>
         <Pagination
