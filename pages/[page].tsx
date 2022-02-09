@@ -12,7 +12,7 @@ import { Pagination, Input } from "antd";
 import "antd/dist/antd.css";
 import Router from "next/router";
 import { Row, Col, Card } from "antd";
-import { hr_style, h2_font_style } from "../styles";
+import { hr_style, h2_font_style, searchbar_style } from "../styles";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -43,7 +43,7 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
 
         <div className={styles.grid} style={{ marginBottom: "30px" }}>
           <Input
-            style={{ marginBottom: "20px", borderRadius: "10px" }}
+            style={searchbar_style}
             placeholder="Search current page"
             onChange={(e) => handleChange(e)}
           />

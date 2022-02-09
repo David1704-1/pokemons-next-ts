@@ -23,3 +23,8 @@ export const p_style = {
   fontSize: "16px",
   fontFamily: "Consolas, monaco, monospace",
 };
+export const searchbar_style = {
+  marginBottom: "20px",
+  borderRadius: "10px",
+  width: "800px ",
+};
