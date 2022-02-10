@@ -22,6 +22,30 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
     e.preventDefault();
     setVal(e.currentTarget.value);
   };
+  const pokemonsResult = (res: any) => {
+    const pokemon_name =
+      res.name.charAt(0).toUpperCase() + res.name.substring(1, res.name.length);
+    return (
+      <Col span={6} key={res.name}>
+        <a href={"pokemon/" + res.name}>
+          <Card
+            hoverable
+            style={{
+              width: 240,
+              borderRadius: "20px",
+              marginRight: "500px",
+            }}
+            cover={<Image src={res.artwork} width={250} height={250} alt="" />}
+          >
+            <hr style={hr_style} />
+            <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
+          </Card>
+        </a>
+      </Col>
+    );
+  };
+  const pokemonsFIlter = (element: any) =>
+    element.key?.toString().includes(val.toLowerCase());
   return (
     <div className={styles.container}>
       <Head>
@@ -48,40 +72,7 @@ const Page: NextPage<PokemonsProps> = ({ pokemons, count, page }) => {
             onChange={(e) => handleChange(e)}
           />
           <Row gutter={[16, 24]} className="rowclass">
-            {pokemons.results
-              .map((res) => {
-                const pokemon_name =
-                  res.name.charAt(0).toUpperCase() +
-                  res.name.substring(1, res.name.length);
-                return (
-                  <Col span={6} key={res.name}>
-                    <a href={"pokemon/" + res.name}>
-                      <Card
-                        hoverable
-                        style={{
-                          width: 240,
-                          borderRadius: "20px",
-                          marginRight: "500px",
-                        }}
-                        cover={
-                          <Image
-                            src={res.artwork}
-                            width={250}
-                            height={250}
-                            alt=""
-                          />
-                        }
-                      >
-                        <hr style={hr_style} />
-                        <h2 style={h2_font_style}>{pokemon_name} &rarr;</h2>
-                      </Card>
-                    </a>
-                  </Col>
-                );
-              })
-              .filter((element) => {
-                return element.key?.toString().includes(val.toLowerCase());
-              })}
+            {pokemons.results.map(pokemonsResult).filter(pokemonsFIlter)}
           </Row>
         </div>
         <Pagination
